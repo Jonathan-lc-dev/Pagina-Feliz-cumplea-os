@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Una sorpresa para ti</title>
+<meta name="theme-color" content="#fff7f3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Anton&family=Great+Vibes&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<button id="sound" class="icon-btn" aria-pressed="true" aria-label="Activar o silenciar el sonido">🔊</button>
+<div id="toast" class="toast" role="status"></div>
+
+<main>
+  <!-- 1. Invitación -->
+  <section id="intro" class="scene active">
+    <p class="script">Hoy es un día especial...</p>
+    <p class="lead">Hay algo bonito esperándote. ¿Quieres descubrirlo?</p>
+    <button id="start" class="btn">Descubrir mi sorpresa</button>
+  </section>
+
+  <!-- 2. Pastel -->
+  <section id="cake" class="scene">
+    <div id="cheer" class="cheer" role="status"></div>
+    <div id="wish" class="wish" role="status">Feliz cumpleaños Fatita 🫶, que todos tus deseos se cumplan.</div>
+    <div id="cake-stage"><div id="wind"></div></div>
+    <p class="hint">Arrastra para ver el pastel desde todos los ángulos</p>
+    <div class="actions">
+      <button id="cheer-btn" class="btn">¡Feliz cumpleaños! 🎂</button>
+      <button id="blow-btn" class="btn alt">Apagar la velita ✨</button>
+    </div>
+    <button id="mic-btn" class="link">o sopla de verdad 🎤</button>
+  </section>
+
+  <!-- 3. Regalo -->
+  <section id="gift" class="scene">
+    <div class="gift-wrap" id="gift-wrap">
+      <p class="wish-mini script">Feliz cumpleaños, que todos tus deseos se cumplan.</p>
+      <div class="box-area" id="box-area">
+        <div class="rays" id="rays"></div>
+        <button id="box" class="box" aria-label="Abrir el regalo">
+          <svg viewBox="0 0 200 190" aria-hidden="true">
+            <defs><linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9c7d5"/><stop offset="1" stop-color="#e99bb4"/></linearGradient>
+            <linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbd3de"/><stop offset="1" stop-color="#f1a9bf"/></linearGradient></defs>
+            <rect x="30" y="88" width="140" height="94" rx="8" fill="url(#gb)"/>
+            <rect x="36" y="88" width="128" height="9" fill="#ffe7a8"/>
+            <rect x="88" y="88" width="24" height="94" fill="#fff4e4" stroke="#c9a45c" stroke-width="1"/>
+            <g id="lid"><rect x="20" y="62" width="160" height="32" rx="8" fill="url(#gl)" stroke="#c9a45c" stroke-width="1.2"/><rect x="88" y="62" width="24" height="32" fill="#fff4e4" stroke="#c9a45c" stroke-width="1"/></g>
+            <g id="bow"><path d="M100 60C70 14 28 36 58 58C78 70 94 64 100 60Z" fill="#fff4e4" stroke="#c9a45c" stroke-width="1.5"/><path d="M100 60C130 14 172 36 142 58C122 70 106 64 100 60Z" fill="#fff4e4" stroke="#c9a45c" stroke-width="1.5"/><path d="M96 64L82 90M104 64L118 90" stroke="#c9a45c" stroke-width="5" stroke-linecap="round"/><circle cx="100" cy="60" r="9" fill="#e6c27a" stroke="#c9a45c"/></g>
+          </svg>
+        </button>
+        <p id="gift-msg" class="script">Hay algo más para ti...</p>
+        <button id="open-btn" class="btn">Abre tu regalo 🎁</button>
+      </div>
+
+      <div id="cards" class="cards">
+        <article class="card verse">
+          <h3>Para tu corazón</h3>
+          <blockquote>Este es el día que hizo el Señor; regocijémonos y alegrémonos en él.</blockquote>
+          <cite>— Salmos 118:24</cite>
+        </article>
+        <article class="card">
+          <h3>Una canción para ti</h3>
+          <button class="sleeve" id="disc" aria-label="Girar el disco de Enjambre">
+            <span class="vinyl" id="vinyl"><span class="label"><b>ENJAMBRE</b></span></span>
+            <span class="cover"><img src="images/enjambre-cover.jpg" alt="Portada de Enjambre y los Huéspedes del Orbe" width="294" height="282"></span>
+          </button>
+          <p class="disc-note" id="disc-note">Hay canciones que guardan sentimientos que a veces no sabemos explicar.</p>
+          <small class="tap">Enjambre y los Huéspedes del Orbe · toca el disco</small>
+        </article>
+        <article class="card">
+          <h3>Pequeños detalles</h3>
+          <div class="bee-slot" id="bee-slot">🌸</div>
+          <p>Como una abejita: ternura, constancia y esos detalles pequeños que hacen especial un día.</p>
+        </article>
+        <article class="card">
+          <h3>Tres notitas</h3>
+          <div class="notes">
+            <button class="note n1" aria-expanded="false"><span class="front">✉ Nota 1</span><span class="paper">No esperes a una fecha señalada para recordarle a alguien lo valioso que es; un gesto a tiempo puede cambiar el día entero de quien lucha en silencio</span></button>
+            <button class="note n2" aria-expanded="false"><span class="front">✉ Nota 2</span><span class="paper">Vivir con menos prisa y menos carga mental permite disfrutar de los pequeños detalles que de verdad importan</span></button>
+            <button class="note n3" aria-expanded="false"><span class="front">✉ Nota 3</span><span class="paper">No hay camino para la paz; la paz es el camino.<em class="by">— Mahatma Gandhi</em></span></button>
+          </div>
+          <small class="tap">Toca cada sobre para abrirlo</small>
+        </article>
+      </div>
+      <div id="bee" class="bee" role="button" tabindex="0" aria-label="Abejita">
+        <svg viewBox="0 0 60 52" width="54" height="47" aria-hidden="true">
+          <g class="wing"><ellipse cx="21" cy="14" rx="11" ry="7" transform="rotate(-25 21 14)"/></g>
+          <g class="wing"><ellipse cx="39" cy="14" rx="11" ry="7" transform="rotate(25 39 14)"/></g>
+          <clipPath id="bc"><ellipse cx="30" cy="31" rx="19" ry="15"/></clipPath>
+          <ellipse cx="30" cy="31" rx="19" ry="15" fill="#ffd45e"/>
+          <g clip-path="url(#bc)" fill="#5b3b35"><rect x="8" y="39" width="44" height="3.5"/><rect x="8" y="45" width="44" height="4"/></g>
+          <path d="M24 17Q20 8 15 9M36 17Q40 8 45 9" stroke="#5b3b35" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="15" cy="9" r="2" fill="#5b3b35"/><circle cx="45" cy="9" r="2" fill="#5b3b35"/>
+          <circle cx="23" cy="28" r="3" fill="#2a1d1d"/><circle cx="37" cy="28" r="3" fill="#2a1d1d"/><circle cx="24" cy="27" r="1" fill="#fff"/><circle cx="38" cy="27" r="1" fill="#fff"/>
+          <circle cx="17" cy="34" r="3.2" fill="#ff9db8" opacity=".75"/><circle cx="43" cy="34" r="3.2" fill="#ff9db8" opacity=".75"/>
+          <path d="M26.5 34Q30 37.5 33.5 34" stroke="#2a1d1d" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+    <button id="next" class="btn" hidden>Siguiente sorpresa ✨</button>
+  </section>
+
+  <!-- 4. Final -->
+  <section id="final" class="scene">
+    <p class="script">Gracias por abrir este regalo</p>
+    <p class="lead">Ojalá este nuevo año venga lleno de paz, alegría y muchos detalles bonitos.</p>
+    <div class="actions">
+      <button id="again-gift" class="btn">Volver a explorar el regalo 🎁</button>
+      <button id="again-cake" class="btn alt">Ver el pastel otra vez 🎂</button>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/cake3d.js"></script>
+<script src="js/main.js"></script>
+<script src="js/gift.js"></script>
+</body>
+</html>
